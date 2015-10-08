@@ -1,0 +1,22 @@
+# Build Dockerfile for rabbit-herder
+#
+# To build:
+# $ docker build -t micahhausler/rabbit-herder-builder -f Dockerfile.build .
+#
+# To run:
+# $ docker run --rm -v $(pwd):/usr/src/app micahhausler/rabbit-herder-builder
+
+#FROM golang:1.5.1-onbuild
+FROM golang:1.5.1
+
+MAINTAINER Micah Hausler, <micah.hausler@ambition.com>
+
+ADD ./ /go/src/github.com/micahhausler/rabbit-herder
+WORKDIR /go/src/github.com/micahhausler/rabbit-herder
+RUN go get -u github.com/micahhausler/rabbit-herder
+
+VOLUME /usr/src/app
+
+RUN go build -v -a -tags netgo -installsuffix netgo -ldflags '-w'
+
+CMD cp ./rabbit-herder /usr/src/app

@@ -11,6 +11,9 @@ _test
 coverage.out
 profile.cov
 
+# Makefile
+Makefile
+
 # Architecture specific extensions/prefixes
 *.[568vq]
 [568vq].out

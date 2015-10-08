@@ -11,6 +11,7 @@ _test
 coverage.out
 
 # Bild artifacts
+rabbit-herder
 
 # Architecture specific extensions/prefixes
 *.[568vq]

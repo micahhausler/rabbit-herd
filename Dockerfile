@@ -1,17 +1,18 @@
-# 
+# Dockerfile for rabbit-herder
 #
 # To build:
-# $ docker run --rm -v $(pwd):/go/src/github.com/micahhausler/template -w /go/src/github.com/micahhausler/template golang:1.5  go build -v -a -tags netgo -installsuffix netgo -ldflags '-w'
-# $ docker build -t micahhausler/template .
+# $ docker build -t micahhausler/rabbit-herder-builder -f Dockerfile.build .
+# $ docker run --rm -v $(pwd):/usr/src/app micahhausler/rabbit-herder-builder
+# $ docker build -t micahhausler/rabbit-herder .
 #
 # To run:
-# $ docker run micahhausler/template 
+# $ docker run micahhausler/rabbit-herder
 
 FROM busybox
 
 MAINTAINER Micah Hausler, <micah.hausler@ambition.com>
 
-COPY template /bin/template
-RUN chmod 755 /bin/template
+COPY rabbit-herder /bin/rabbit-herder
+RUN chmod 755 /bin/rabbit-herder
 
-ENTRYPOINT ["/bin/template"]
+ENTRYPOINT ["/bin/rabbit-herder"]
