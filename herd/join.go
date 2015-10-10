@@ -35,7 +35,10 @@ func JoinCluster(ips []string, dryRun bool) {
 		hostname := fmt.Sprintf("rabbit@%s", ip)
 		err = RunRabbitmqctl([]string{"join_cluster", hostname}, dryRun)
 		if err != nil {
-			fmt.Printf("Error joining node %s\n", ip)
+			fmt.Printf("Error joining %s\n", hostname)
+		} else {
+			fmt.Printf("Successfully joined %s\n", hostname)
+			break
 		}
 	}
 	err = RunRabbitmqctl([]string{"start_app"}, dryRun)
